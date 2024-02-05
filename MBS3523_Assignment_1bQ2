@@ -1,0 +1,17 @@
+
+import cv2
+
+cam = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+while True:
+    ret, original = cam.read()
+    Gaussian_Blur = cv2.GaussianBlur(original, (25, 25), 0)
+    HSV_color_space = cv2.cvtColor(original, cv2.COLOR_RGB2HSV)
+    Canny_edges = cv2.Canny(original, 100, 200)
+    cv2.imshow('Gaussian_Blur', Gaussian_Blur)
+    cv2.imshow('original', original)
+    cv2.imshow('HSV_color_space', HSV_color_space)
+    cv2.imshow('Canny_edges', Canny_edges)
+    if cv2.waitKey(1) & 0xff == ord('q'):
+        break
+cam.release()
+cv2.destroyAllWindows()
