@@ -1,0 +1,19 @@
+import cv2
+import numpy as np
+
+cam = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+while True:
+    ret, frame2 = cam.read()
+    frame1 = cv2.flip(frame2, 0)
+    frame3 = cv2.rotate(frame1, cv2.ROTATE_180)
+    frame4 = cv2.flip(frame3, 0)
+    img = np.zeros((960, 1280, 3), np.uint8)
+    img[0:480, 0:640] = frame2
+    img[0:480, 640:1280] = frame3
+    img[480:960, 0:640] = frame1
+    img[480:960, 640:1280] = frame4
+    cv2.imshow('img', img)
+    if cv2.waitKey(1) & 0xff == ord('q'):
+        break
+cam.release()
+cv2.destroyAllWindows()
